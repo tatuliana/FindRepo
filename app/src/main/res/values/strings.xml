@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Find Repo</string>
+    <string name="search_for_repos">Search for Repos</string>
+    <string name="search">SEARCH</string>
+    <string name="project_name">Project Name</string>
+    <string name="view_user_s_repos">View User\'s Repos</string>
+    <string name="view">VIEW</string>
+</resources>
