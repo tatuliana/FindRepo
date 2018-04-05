@@ -3,9 +3,9 @@ package com.tatuliana.findrepo
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,25 +30,20 @@ class SearchResultActivity : AppCompatActivity() {
 
         if(searchTerm != null) {
             val callback = object : Callback<GitHubSearchResult>{
-                override fun onFailure(call: Call<GitHubSearchResult>?, t: Throwable?) {
-                    println("It is NOT working!!!!")
-                }
-
                 override fun onResponse(call: Call<GitHubSearchResult>?, response: Response<GitHubSearchResult>?) {
                     val searchResult = response?.body()
                     if (searchResult != null){
                         listRepos(searchResult!!.items)
                     }
                 }
+                override fun onFailure(call: Call<GitHubSearchResult>?, t: Throwable?) {
+                    println("It is NOT working!!!!")
+                }
             }
             retriever.searchRepos(callback, searchTerm)
         } else {
             val username = intent.getStringExtra("username")
             val callback = object : Callback<List<Repo>>{
-                override fun onFailure(call: Call<List<Repo>>?, t: Throwable?) {
-                    println("NOT WORKING!!!! :(((")
-                }
-
                 override fun onResponse(call: Call<List<Repo>>?, response: Response<List<Repo>>?) {
                     if (response?.code() == 404){
                         val theView = this@SearchResultActivity.findViewById<View>(android.R.id.content)
@@ -59,6 +54,9 @@ class SearchResultActivity : AppCompatActivity() {
                             listRepos(repos)
                         }
                     }
+                }
+                override fun onFailure(call: Call<List<Repo>>?, t: Throwable?) {
+                    println("NOT WORKING!!!! :(((")
                 }
             }
             retriever.userRepos(callback, username)

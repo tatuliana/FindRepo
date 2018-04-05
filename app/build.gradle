@@ -12,7 +12,6 @@ android {
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
@@ -35,7 +34,7 @@ configurations.all {
         force 'com.android.support:support-annotations:27.1.0'
         force 'com.android.support:support-v4:27.1.0'
         force 'com.android.support:appcompat-v7:27.1.0'
-        force 'com.android.support:design:27.1.0'
+//        force 'com.android.support:design:27.1.0'
         force 'com.android.support:support-compat:27.1.0'
         force 'com.android.support:support-core-ui:27.1.0'
         force 'com.android.support:recyclerview-v7:27.1.0'
@@ -44,31 +43,48 @@ configurations.all {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation('de.greenrobot:eventbus:2.0.1', {
-        exclude group: 'junit', module: 'junit'
-        exclude group: 'com.google.android', module: 'support-v4'
-    })
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
-    implementation 'com.squareup.picasso:picasso:2.71828'
-    implementation 'com.android.support:design:27.1.0'
-    implementation 'com.android.support:support-v4:27.1.0'
-    implementation 'com.android.support:support-annotations:27.1.0'
-    implementation 'com.android.support:appcompat-v7:27.1.0'
-    implementation 'com.android.support:design:27.1.0'
-//    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.2'
-    implementation 'com.google.code.gson:gson:2.8.2'
-
     testImplementation 'junit:junit:4.12'
-    testImplementation "org.mockito:mockito-core:2.7.22"
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test:rules:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-contrib:3.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-intents:3.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-web:3.0.1'
-    androidTestImplementation 'com.android.support.test.espresso.idling:idling-concurrent:3.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-idling-resource:3.0.1'
+    compile 'com.squareup.retrofit2:retrofit:2.4.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.android.support:design:27.1.1'
+
+//    compile('de.greenrobot:eventbus:2.0.1', {
+//        exclude group: 'junit', module: 'junit'
+//        exclude group: 'com.google.android', module: 'support-v4'
+//    })
+
+    compile 'com.android.support:support-v4:27.1.1'
+    compile 'com.android.support:support-annotations:27.1.1'
+    compile 'com.android.support:appcompat-v7:27.1.1'
+    compile 'com.android.support:design:27.1.1'
+    compile 'com.android.support.constraint:constraint-layout:1.1.0-beta6'
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
+    compile 'com.google.code.gson:gson:2.8.2'
+
+    testCompile 'junit:junit:4.12'
+    testCompile "org.mockito:mockito-core:2.7.22"
+
+    // AndroidJUnitRunner and JUnit Rules
+    androidTestCompile 'com.android.support.test:runner:1.0.1'
+    androidTestCompile 'com.android.support.test:rules:1.0.1'
+
+
+    // Espresso dependencies
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:3.0.1'
+    androidTestCompile 'com.android.support.test.espresso:espresso-contrib:3.0.1'
+    androidTestCompile 'com.android.support.test.espresso:espresso-intents:3.0.1'
+    androidTestCompile 'com.android.support.test.espresso:espresso-web:3.0.1'
+    androidTestCompile 'com.android.support.test.espresso.idling:idling-concurrent:3.0.1'
+    androidTestCompile 'com.android.support.test.espresso:espresso-idling-resource:3.0.1'
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestImplementation 'junit:junit:4.12'
+    androidTestImplementation 'junit:junit:4.12'
 }
+
