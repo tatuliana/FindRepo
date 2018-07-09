@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "846646178753",
+    "firebase_url": "https://find-repo.firebaseio.com",
+    "project_id": "find-repo",
+    "storage_bucket": "find-repo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:846646178753:android:b9e65372792e0e27",
+        "android_client_info": {
+          "package_name": "com.tatuliana.findrepo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "846646178753-aualh37hun3ask063r8etimkgsirmcb2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByU29rANYBk6Tol37Zc0YfyNWiKsLPihs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

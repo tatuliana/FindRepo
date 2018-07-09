@@ -22,6 +22,7 @@ import retrofit2.Response
 class SearchResultActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_result)
 
@@ -29,21 +30,32 @@ class SearchResultActivity : AppCompatActivity() {
         val retriever = GitHubRetriever()
 
         if(searchTerm != null) {
-            val callback = object : Callback<GitHubSearchResult>{
+            val callback = object : Callback<GitHubSearchResult> {
+
                 override fun onResponse(call: Call<GitHubSearchResult>?, response: Response<GitHubSearchResult>?) {
-                    val searchResult = response?.body()
-                    if (searchResult != null){
-                        listRepos(searchResult!!.items)
+                    if (response?.body()?.total_count == 0) {
+                        val theView = this@SearchResultActivity.findViewById<View>(android.R.id.content)
+                        Snackbar.make(theView, "REPO not found!!! GO BACK and try again!!!", Snackbar.LENGTH_LONG).show()
+                    } else {
+                        val searchResult = response?.body()
+                        if (searchResult != null) {
+                            listRepos(searchResult!!.items)
+                        }
                     }
                 }
+
                 override fun onFailure(call: Call<GitHubSearchResult>?, t: Throwable?) {
                     println("It is NOT working!!!!")
                 }
             }
+
             retriever.searchRepos(callback, searchTerm)
+
         } else {
+
             val username = intent.getStringExtra("username")
             val callback = object : Callback<List<Repo>>{
+
                 override fun onResponse(call: Call<List<Repo>>?, response: Response<List<Repo>>?) {
                     if (response?.code() == 404){
                         val theView = this@SearchResultActivity.findViewById<View>(android.R.id.content)
@@ -55,15 +67,19 @@ class SearchResultActivity : AppCompatActivity() {
                         }
                     }
                 }
+
                 override fun onFailure(call: Call<List<Repo>>?, t: Throwable?) {
                     println("NOT WORKING!!!! :(((")
                 }
             }
+
             retriever.userRepos(callback, username)
+
         }
     }
 
     fun listRepos(repos: List<Repo>) {
+
         val listView = findViewById<ListView>(R.id.repoListView)
         listView.setOnItemClickListener { adapterView, view, i, l ->
             val selectedRepo = repos!![i]
@@ -77,6 +93,7 @@ class SearchResultActivity : AppCompatActivity() {
 }
 
 class RepoAdapter(context: Context?, resource: Int, objects: List<Repo>?): ArrayAdapter<Repo>(context, resource, objects){
+
     override fun getCount(): Int {
         return super.getCount()
     }
@@ -94,3 +111,4 @@ class RepoAdapter(context: Context?, resource: Int, objects: List<Repo>?): Array
         return repoView
     }
 }
+
