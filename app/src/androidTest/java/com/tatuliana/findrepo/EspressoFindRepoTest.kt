@@ -12,6 +12,9 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class EspressoFindRepoTest: BaseTest() {
+    val defaultRepo = "kotlin"
+    val repo = "DoctorOnDemand"
+    val user = "tatuliana"
 
     @get:Rule
     val testRule: ActivityTestRule<MainActivity> = ActivityTestRule(MainActivity::class.java, false, true)
@@ -24,32 +27,32 @@ class EspressoFindRepoTest: BaseTest() {
         Thread.sleep(5000)
         val firstRepo = searchResultScreen.repoItemByIndex(0)
         val firstRepoName = firstRepo.repoName
-        Assert.assertTrue("Repo name does not contain kotlin", firstRepoName.contains("kotlin"))
+        Assert.assertTrue("Repo name does not contain $defaultRepo", firstRepoName.contains(defaultRepo))
     }
 
     @Test
     fun searchForRepoAndCheckOnGitHub() {
         val mainScreen = MainScreen()
-        mainScreen.enterRepoName("DoctorOnDemand")
+        mainScreen.enterRepoName(repo)
         val searchResultScreen = mainScreen.clickOnSearchRepoButton()
         Thread.sleep(5000)
         val gitHubScreen = searchResultScreen.clickOnItem(0)
         Thread.sleep(5000)
         val urlBar = gitHubScreen.urlBar
         Assert.assertTrue("Url Bar is not presented", urlBar.waitForExists(5000))
-        Assert.assertTrue("Repo name does not contain DoctorOnDemand", gitHubScreen.actualUrl.contains("DoctorOnDemand"))
+        Assert.assertTrue("Repo name does not contain $repo", gitHubScreen.actualUrl.contains(repo))
     }
 
     @Test
     fun searchForValidGitUser() {
         val mainScreen = MainScreen()
-        mainScreen.enterUserName("tatuliana")
+        mainScreen.enterUserName(user)
         closeSoftKeyboard()
         val searchResultScreen = mainScreen.clickOnSearchUserButton()
         Thread.sleep(5000)
         val firstUser = searchResultScreen.repoItemByIndex(0)
         val firstUserName = firstUser.repoName
-        Assert.assertTrue("Search result doesn't contain user name tatuliana", firstUserName.contains("tatuliana"))
+        Assert.assertTrue("Search result doesn't contain user name $user", firstUserName.contains(user))
     }
 
     @Test
@@ -72,7 +75,7 @@ class EspressoFindRepoTest: BaseTest() {
     @Test
     fun checkRepoHint() {
         val mainScreen = MainScreen()
-        mainScreen.enterRepoName("DoctorOnDemand")
+        mainScreen.enterRepoName(repo)
         val searchResultScreen = mainScreen.clickOnSearchRepoButton()
         Thread.sleep(5000)
         pressBack()
@@ -84,7 +87,7 @@ class EspressoFindRepoTest: BaseTest() {
     @Test
     fun checkUserHint() {
         val mainScreen = MainScreen()
-        mainScreen.enterUserName("tatuliana")
+        mainScreen.enterUserName(user)
         closeSoftKeyboard()
         val searchResultScreen = mainScreen.clickOnSearchUserButton()
         Thread.sleep(5000)
